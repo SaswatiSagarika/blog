@@ -17,33 +17,22 @@
 
 $(document).ready( function() {
    
-     // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-   // var csrf = $.cookie('csrf_cookie_name');
-    // var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
-   
     var csrf_test_name = $("input[name=csrf_test_name]").val(); 
         $("#postbutton").on('click',function(e){
         e.preventDefault();
         $.blockUI({ message: '<h1> Just a moment...</h1>' });
         
-        
         $('input+span>strong').text('');
         $('input').parent().parent().removeClass('has-error');
-        
-        //$('textarea+span>strong').text('');
-        //$('textarea').parent().parent().removeClass('has-error');
-        
+      
         $.ajax({
-            url: 'http://localhost/CodeIgniter-2.2.6/index.php/comment/addnewcomments',
+            url: 'http://localhost/CodeIgniter/index.php/comment/addnewcomments',
             type: 'post',
             data: { csrf_test_name : csrf_test_name, id:$("#id").val(), name:$("#name").val(),
             email:$("#email").val(),comment:$("#comment").val()},
             dataType: 'JSON',
             success: function (response) {
                 
-                // console.log(response);
-                 //alert(response['error']);
-               
                 if(response['error']== 'True'){
                     var error = '<div class="alert alert-danger"><ul>';
                
@@ -64,20 +53,6 @@ $(document).ready( function() {
              $.unblockUI();   
             }
             
-            
-            
-        }).fail(function (data) {
-                    //$.each(data.responseJSON, function (key, value) {
-                    //    
-                    //    var input = '#myform input[name=' + key + ']';
-                    //    $(input + '+span>strong').text(value);
-                    //    $(input).parent().parent().addClass('has-error');
-                    //    
-                    //    var textarea = '#myform input[name=' + key + ']';
-                    //    $(textarea + '+span>strong').text(value);
-                    //    $(textarea).parent().parent().addClass('has-error');
-                    //    
-                    //    });
             });
         });
     });

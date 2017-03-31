@@ -1,8 +1,13 @@
 <?php if (! defined('BASEPATH')) { exit('No direct script access allowed');
 }
- 
-
-
+/**
+    *File name: Comment.
+    *File type: php.
+    *Date of  creation:20th Feb 2017.
+    *Author:mindfire solutions.
+    *Purpose: this php file contains different functions to be called from controller file.
+    *Path:D:\PHP Projects\blog and comments\blog1\app.
+    **/
 class Comment extends CI_Controller
 {
 
@@ -19,21 +24,20 @@ class Comment extends CI_Controller
     
     }
     /**
-* 
-* 
-   * Show the form for creating a new resource.
-   *
-   * @return Response
+    * 
+    * 
+    * Show the form for creating a new resource.
+    *
+    * @return Response
    
-*/
+    */
     public function addnewcomments()    
     {
-         $this->load->library('form_validation');
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('email', 'E-Mail Address', 'required');
         $this->form_validation->set_rules('comment', 'Message', 'required');
 
-         // $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');  
         if($this->form_validation->run() == true) { 
             $this->load->model('commentmodel');
             $id =$this->input->post('id');
@@ -55,7 +59,6 @@ class Comment extends CI_Controller
         
         }
   
-    
     }
 
 }

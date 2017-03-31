@@ -1,3 +1,13 @@
+<?php
+/**
+    *File name: nav-bar.
+    *File type: php.
+    *Date of  creation:20th March 2017.
+    *Author:mindfire solutions(saswati).
+    *Purpose: this php file extends to all other files.
+    *Path:D:\PHP Projects\blog and comments\blog1\resources\veiws\layouts.
+    **/
+?>
 <body id="app-layout">
     
 <nav class="navbar navbar-default">

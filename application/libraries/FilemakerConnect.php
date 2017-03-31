@@ -33,26 +33,34 @@ class FilemakerConnect
     public function __construct()
     {   
 
-        // $ci =& get_instance();
-        // include_once('FileMaker.php');
-        
-
-        // $this->load->library('FileMaker');
-
         $this->db = new FileMaker('Blog.fmp12', '172.16.9.62', 'Admin', 'mindfire');
        
     }
-
+/**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
     public function getFMInstance()
     {
          return $this->db;
     }
+    /**
+     * print the data provided
+     *
+     * @return $data
+     */
     public function dd($data)
     {
 
         echo '<pre>';
         print_r($data);
     }
+    /**
+     * perform iserror method.
+     *
+     * 
+     */
     public function isError($data)
     {
 

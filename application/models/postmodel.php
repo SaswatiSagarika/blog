@@ -1,11 +1,15 @@
 <?php if (! defined('BASEPATH')) { exit('No direct script access allowed');
 }
-
+/**
+    *File name: Postmodal.
+    *File type: php.
+    *Date of  creation:20th March 2017.
+    *Author:mindfire solutions.
+    *Purpose: this php file contains functions to be called in controller file.
+    *Path:D:\PHP Projects\blog and comments\blog1\app.
+    **/
 class Postmodel extends CI_Model
 {
-
-
-
     public $db;
     public $date;
          //calling the FM constuctor class
@@ -18,15 +22,15 @@ class Postmodel extends CI_Model
     }
 
     /**
-* 
-* 
+    * 
+    * 
      * create new blogs.
      *
      * @param int $name,$subject, $content
      * 
      * @return $records
      
-*/
+    */
     public function createnewpost($name, $subject, $content)    
     {      
         $this->db = $this->filemakerconnect->getFMInstance();
@@ -38,17 +42,16 @@ class Postmodel extends CI_Model
          
     
     }
-        /**
-* 
-* 
-        *  Show all records present in the DB with pagination and alos perform search opration on them.
-        *
-        * @param String $search - string needed to be searched in the DB
-        * @param Int    $Skip   -contain the pageno value
-        * 
-        * @return records.
-        
-*/
+    /**
+    * 
+    *  Show all records present in the DB with pagination and alos perform search opration on them.
+    *
+    * @param String $search - string needed to be searched in the DB
+    * @param Int    $Skip   -contain the pageno value
+    * 
+    * @return records.
+    
+    */
     public function showall($skip, $search)
     {
 
@@ -93,29 +96,23 @@ class Postmodel extends CI_Model
             
             }
             $record->addSortRule('BlogId', 1, FILEMAKER_SORT_ASCEND);    
-            //$record = $this->db->newPerformScriptCommand('Blogger', 'CompoundSearch', $search);
-                    
-                 
+               
             echo $this->filemakerconnect->isError($record);
-            //$this->filemakerconnect->dd($record);
-        
+            
         } else{
                     
             $record = $this->db->newFindAllCommand('Blogger');
         
         }                       
-                    $max=3;               
+        $max=3;               
         if(!isset($skip)) { $skip = 0; 
-        }
-                    //else{ $skip= $skip*3; }
-                                
-                    $record->setRange($skip, $max);
-                    
-                    $result = $record->execute();
-                
-                   $error = $this->filemakerconnect->isError($result);
+        }           
+        $record->setRange($skip, $max);
+        
+        $result = $record->execute();
+    
+       $error = $this->filemakerconnect->isError($result);
                
-                
         if(!$error) {
             $record_count = $result->getFoundSetCount();
             echo $this->filemakerconnect->isError($record_count);
@@ -123,9 +120,7 @@ class Postmodel extends CI_Model
             $records = $result->getRecords();
             return [$records,$record_count];
         
-        }     
-                
-        else{
+        }else{
                     
             return [$result,0];
         
@@ -133,18 +128,18 @@ class Postmodel extends CI_Model
     
     }
 
-        /**
-* 
-* 
-        *  Show the selected record along with its comments
-        *
-        * @param String                                   $id - contain id variable .
-        * @param $comments - comments searched from the DB
-        * @param $records -record searched from the Db
-        * 
-        * @return records and $comments.
-        
-*/
+    /**
+    * 
+    * 
+    *  Show the selected record along with its comments
+    *
+    * @param String                                   $id - contain id variable .
+    * @param $comments - comments searched from the DB
+    * @param $records -record searched from the Db
+    * 
+    * @return records and $comments.
+    
+    */
     public function readpost($id)    
     {
               $this->db = $this->filemakerconnect->getFMInstance(); 
@@ -164,51 +159,43 @@ class Postmodel extends CI_Model
                  $comments = $record->getRelatedSet('Blog_Comments__BlogId');
             
             }
+            
             if($this->filemakerconnect->isError($comments)== true) {
                 $comments = 0;
-            
             }
-            // $this->filemakerconnect->dd($records);
+            
             return [$records, $comments];
         
         }
 
-           
-
-            
-                    
-    
     }
-        /**
-* 
-* 
-        *  delete the selected record
-        *  
-        * @param String $request - contain id variable .
-        * @Param $id -releted record is deleted based on it
-        * 
-        * @return records.
-        
-*/
+    /**
+    * 
+    * 
+    *  delete the selected record
+    *  
+    * @param String $request - contain id variable .
+    * @Param $id -releted record is deleted based on it
+    * 
+    * @return records.
+    
+    */
     public function deletepost($id)    
     {
         $this->db = $this->filemakerconnect->getFMInstance(); 
         $record = $this->db->newDeleteCommand('blogger', $id);
         $result = $record->execute();
-           
-           
-        
-    
+     
     }
-        /**
-* 
-* 
-            *  save the fields where changes are made
-            *
-            * @param String $request - contain id variable.
-            * 
-            
-*/
+    /**
+    * 
+    * 
+    *  save the fields where changes are made
+    *
+    * @param String $request - contain id variable.
+    * 
+    
+    */
     public function editpost($id, $name, $subject, $content)    
     {
         $this->db = $this->filemakerconnect->getFMInstance();
@@ -234,17 +221,17 @@ class Postmodel extends CI_Model
 
     
     }
-        /**
-* 
-* 
-        *  get the records details based on Id
-        *
-        * @param String $request - contain id variable .
-        * @Param $id -releted record is searched based on it
-        * 
-        * @return records.
-        
-*/
+    /**
+    * 
+    * 
+    *  get the records details based on Id
+    *
+    * @param String $request - contain id variable .
+    * @Param $id -releted record is searched based on it
+    * 
+    * @return records.
+    
+    */
     public function getblogdetailsbyId($id)    
     {
             $this->db = $this->filemakerconnect->getFMInstance(); 

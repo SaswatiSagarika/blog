@@ -1,6 +1,13 @@
 <?php if (! defined('BASEPATH')) { exit('No direct script access allowed');
 }
-
+/**
+    *File name: welcome.
+    *File type: php.
+    *Date of  creation:10th May 2016.
+    *Author:mindfire solutions.
+    *Purpose: this php file contains different functions to be called in routes file.
+    *Path:D:\PHP Projects\blog and comments\blog1\app\HTTP\Controller.
+    **/
 class Welcome extends CI_Controller
 {
 
@@ -20,36 +27,48 @@ class Welcome extends CI_Controller
   *
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
+    /**
+     
+     * @shows the welcomepage
+     */
     public function index()
     {       
         $this->load->view('blogassests/headerfile');
          $this->load->view('blogassests/nav-bar');
         $this->load->view('welcomepage');
     }
+    
+    
     public function home()
     {
         $this->load->view('blogassests/headerfile');
               $this->load->view('blogassests/nav-bar');
         $this->load->view('welcomepage');
     }
-    public function demo()
-    {
-        $this->load->view('demo/headerfile');
-        $this->load->view('demo/nav-bar');
-        $this->load->view('demo/body');
-    }
+     /**
+     
+     * @shows the about page
+     */
     public function about()
     {
         $this->load->view('blogassests/headerfile');
          $this->load->view('blogassests/nav-bar');
         $this->load->view('about');
     }
+     /**
+     
+     * @shows the Contactpage
+     */
     public function contact()
     {
         $this->load->view('blogassests/headerfile');
          $this->load->view('blogassests/nav-bar');
         $this->load->view('contact');
     }
+     /**
+     
+     * @shows the newblogform
+     */
     public function newblogform()
     {
         $this->load->view('blogassests/headerfile');

@@ -1,6 +1,13 @@
 <?php if (! defined('BASEPATH')) { exit('No direct script access allowed');
 }
- 
+ /**
+    *File name: Post.
+    *File type: php.
+    *Date of  creation:20th Feb 2017.
+    *Author:mindfire solutions.
+    *Purpose: this php file contains functions to be called from controller file.
+    *Path:D:\PHP Projects\blog and comments\blog1\app.
+    **/
 
 
 class Post extends CI_Controller
@@ -9,7 +16,9 @@ class Post extends CI_Controller
 
 
     protected $fm, $main_menu, $current_only;
-
+    /**
+    *  Calls the filemaker parent class
+    */
     public function __construct()
     {
         
@@ -20,13 +29,13 @@ class Post extends CI_Controller
     }
   
     /**
-* 
-* 
+    * 
+    * 
    * Show the form for creating a new resource.
    *
-   * @return Response
+   * @return to showall page
    
-*/
+    */
     public function createnew()    
     {
                  
@@ -51,6 +60,7 @@ class Post extends CI_Controller
             
         }
         else{
+            
             $this->load->view('blogassests/headerfile');
             $this->load->view('blogassests/nav-bar');
             $this->load->view('newblogform');
@@ -65,6 +75,12 @@ class Post extends CI_Controller
         $this->load->view('newblogform');
     
     }
+    /**
+     * Display the list of blog with pagination.
+     *
+     * @param  int  $skip
+     * @return $records
+     */
     public function showall()
     {
 
@@ -86,6 +102,12 @@ class Post extends CI_Controller
         $this->load->view('Showall', $records);
     
     }
+     /**
+     * go to specified blog from storage in the update form.
+     *
+     * @param  int  $id
+     * @return $records
+     */
     public function editblogform()
     {
 
@@ -99,7 +121,12 @@ class Post extends CI_Controller
         $this->load->view('filemaker/editblog', $data);
 
     }
-
+    /**
+     * delete form  to conform if they want to delete the blog
+     *
+     * @param  int  $id
+     * @return records
+     */
     public function deleteblogform()
     {
 
@@ -111,7 +138,12 @@ class Post extends CI_Controller
         $this->load->view('filemaker/deleteblog', $data);
 
     }
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     *
+     * @return Records and comments
+     */
     public function readblogform()
     {
 
@@ -127,14 +159,14 @@ class Post extends CI_Controller
 
     }
     /**
-* 
-* 
-     * Remove the specified blog from storage.
-     *
-     * @param  int $id
-     * @return Response
-     
-*/
+    * 
+    * 
+    * Remove the specified blog from storage.
+    *
+    * @param  int $id
+    * @return Response
+    
+    */
     public function destroyblog()    
     {
         $this->load->model('postmodel');
@@ -144,14 +176,14 @@ class Post extends CI_Controller
     
     }
     /**
-* 
-* 
-   * Show the form for editing the blog resource.
-   *
-   * @param  int $id
-   * @return to list page
-   
-*/
+    * 
+    * 
+    * Show the form for editing the blog resource.
+    *
+    * @param  int $id
+    * @return to list page
+    
+    */
     public function editrecordblog()    
     {
         $this->load->model('postmodel');

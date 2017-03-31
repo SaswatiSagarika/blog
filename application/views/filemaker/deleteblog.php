@@ -1,8 +1,8 @@
 <?php
 /**
-    *File name: delete.blade.
+    *File name: deleteblog.
     *File type: php.
-    *Date of  creation:20th Feb 2017.
+    *Date of  creation:20th March 2017.
     *Author:mindfire solutions.
     *Purpose: this php file  get id and delete the student record.
     *Path:D:\PHP Projects\blog and comments\blog1\resources\veiws\pages.

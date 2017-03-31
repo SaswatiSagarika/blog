@@ -1,8 +1,8 @@
 <?php
 /**
-    *File name: master.blade.
+    *File name: headerfile.
     *File type: php.
-    *Date of  creation:20th Feb 2017.
+    *Date of  creation:20th March 2017.
     *Author:mindfire solutions(saswati).
     *Purpose: this php file extends to all other files.
     *Path:D:\PHP Projects\blog and comments\blog1\resources\veiws\layouts.

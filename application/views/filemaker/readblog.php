@@ -1,8 +1,8 @@
 <?php
 /**
-    *File name: master.blade.
+    *File name: readblog.
     *File type: php.
-    *Date of  creation:20th Feb 2017.
+    *Date of  creation:20th March 2017.
     *Author:mindfire solutions(saswati).
     *Purpose: this php file extends to all other files.
     *Path:D:\PHP Projects\blog and comments\blog1\resources\veiws\layouts.
@@ -12,9 +12,7 @@
 <html lang="en">
 <head>
  
-
     <title>Read blog in details</title>
-
 <meta name="csrf-token" content="{{ csrf_token() }}" />
     
 </head>
@@ -146,7 +144,7 @@
 </div>
 
     
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/CommentAjax.js">var baseurl = "<?php print base_url(); ?>";</script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/commentajax.js">var baseurl = "<?php print base_url(); ?>";</script>
         
 </body>
 </html>

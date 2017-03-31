@@ -1,8 +1,8 @@
 <?php
 /**
-    *File name: master.blade.
+    *File name: ShowAll.
     *File type: php.
-    *Date of  creation:20th Feb 2017.
+    *Date of  creation:20th March 2017.
     *Author:mindfire solutions(saswati).
     *Purpose: this php file extends to all other files.
     *Path:D:\PHP Projects\blog and comments\blog1\resources\veiws\layouts.
@@ -88,14 +88,14 @@
                 $record_count = $resources2;
                 if ($skip>0) :  // previous button
                 
-                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$prev&search=$search'>Prev</a></li> ";
+                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter/index.php/post/showall?skip=$prev&search=$search'>Prev</a></li> ";
                 endif;
                 $i=1;
                 for($x=0; $x<$record_count; $x=$x+$per_page):      // numbers between previous and next
                     if ($skip==$x) :
-                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";        
+                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";        
                         else :
-                            echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";
+                            echo "<li class='page-item'><a href='http://localhost/CodeIgniter/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";
                         
                         endif;
                         $i++;
