@@ -26,7 +26,7 @@
        
         <li class="dropdown">
                    
-            <li><a href="<?php echo site_url('welcome/newblogform') ?>">Add New Blog</a></li>
+            <li><a href="<?php echo site_url('post/newblogform') ?>">Add New Blog</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="<?php echo site_url('post/showall') ?>">All Blogs</a></li>
             <li><a href="<?php echo site_url('welcome/demo') ?>">Demo</a></li>

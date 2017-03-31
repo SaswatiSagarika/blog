@@ -24,15 +24,17 @@
                    <div class="row">
                 
             
-                   <form class="myform" id="myform" action="<?php echo site_url('/post/createnew')?>" method="POST">
-            
-
+                  
+                        <?php
+                        echo form_open('/post/createnew', array('id'=>'myform', 'class'=>'myform'));
+                    ?>
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" id="token" value="<?php echo $this->security->get_csrf_hash(); ?>"> 
                         <div class="form-group">
                             <label class="col-md-3 control-label">Subject</label>
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control" name="subject" id="subject">
-
+                                <?php echo form_error('subject'); ?> 
                             </div>
                         </div>
 <br>
@@ -41,7 +43,7 @@
 
                             <div class="col-md-8">
                                 <input type="email" class="form-control" name="email" id="email">
-
+                                <?php echo form_error('email'); ?>  
                             </div>
                         </div>
 <br>
@@ -50,7 +52,7 @@
 
                             <div class="col-md-8">
                                 <input type="Text" class="form-control" name="name" id="name">
-
+                                <?php echo form_error('name'); ?> 
                             </div>
                         </div>
 
@@ -59,7 +61,7 @@
 
                             <div class="col-md-8">
                                 <Textarea type="text" rows="12" class="form-control" name="content" id="content"></textarea>
-
+                                <?php echo form_error('content'); ?> 
                             </div>
                         </div>
                         

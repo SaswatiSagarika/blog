@@ -1,4 +1,5 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) { exit('No direct script access allowed');
+}
 /**
 +--------------------------------------------------------------------
 | File    : BootGridWrapper.php
@@ -13,9 +14,8 @@
 
 /**
 * It contains methods used for connecting magento SOAP api
-*
 */
-require_once ('Filemaker/FileMaker.php');
+require_once 'Filemaker/FileMaker.php';
 
 class FilemakerConnect
 {
@@ -27,9 +27,8 @@ class FilemakerConnect
     /**
     * Used to initialize objects
     *
-    * @param String $dbConfig - dbconfig filename
+    * @param  String $dbConfig - dbconfig filename
     * @return Object - Filemaker connection object
-    *
     */
     public function __construct()
     {   
@@ -48,18 +47,22 @@ class FilemakerConnect
     {
          return $this->db;
     }
-    public function dd($data){
+    public function dd($data)
+    {
 
         echo '<pre>';
         print_r($data);
     }
-    public function isError($data){
+    public function isError($data)
+    {
 
         $ci = new FileMaker();
 
-        if( Filemaker::isError($data)){
-            dd($data->getmessage());
+        if(Filemaker::isError($data)) {
+            return true;
         }
+
+        return false;
 
     }
 

@@ -27,8 +27,8 @@
                         <h1>Archives</h1>
                         <p>This is What I do </p>
                     </div>
-                     <form class="myform" action="" method="GET">
-                        
+                     <form class="myform" action="<?php echo site_url('/post/showall')?>" method="GET">
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" id="token" value="<?php echo $this->security->get_csrf_hash(); ?>"> 
                         <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
                           <div class="input-group">
@@ -45,8 +45,12 @@
                     
                 <div class="panel-body">
                  
-                <?php foreach($resources as $record):
-                ?>
+                <?php
+                if(is_array($resources1)) :
+                               
+                    foreach($resources1 as $record):
+                        //$i++;
+                        ?>
                     <div class="panel panel-primary">
                         <div style="height: 54px;"class="panel-heading">
                             <p hidden><?php $BlogID = $record->getField('BlogId');?></p>
@@ -65,22 +69,54 @@
                             
                         </div>
                     </div>
-                <?php endforeach;?>
-          
+                    <?php endforeach;
+                 else:
+                        echo '<h4>'.$resources1.'</h4>';
+                 endif;
+                    ?>
+                
                 <ul class="pagination">
-                    <!--<li><a href="{{url('/list')}}?skip=0"><<</a></li>-->
-                    <li class="page-item"><a class="page-link" href="<?php echo site_url('/post/showall/0')?>" >1</a></li>
-                    <li class="page-item"><a class="page-link" href="<?php echo site_url('/post/showall/1')?>">2</a></li>
-                    <li class="page-item"><a class="page-link" href="<?php echo site_url('/post/showall/2')?>">3</a></li>
-                    <li class="page-item"><a class="page-link" href="<?php echo site_url('/post/showall/3')?>" >4</a></li>
-                  </ul>
+               
+                <?php 
+                
+                // PAGINATION cont.
+                $per_page = 3;
+                $search=$this->input->get('search');
+                $skip=$this->uri->segment(3);
+                $prev = $skip - $per_page;
+                $next = $skip + $per_page;
+                $record_count = $resources2;
+                if ($skip>0) :  // previous button
+                
+                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$prev&search=$search'>Prev</a></li> ";
+                endif;
+                $i=1;
+                for($x=0; $x<$record_count; $x=$x+$per_page):      // numbers between previous and next
+                    if ($skip==$x) :
+                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";        
+                        else :
+                            echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";
+                        
+                        endif;
+                        $i++;
+                endfor;    
+
+                //if (!($skip>=$record_count - $per_page)):  // next button
+                //        echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$next&search=$search'>Next</a></li> ";
+                //endif;
+                ?>
+               </ul>
                 </div> 
             </div>
         </div>
     </div>
 </div>
-
- 
+<script>
+    $('.pagination li > a').click(function() {
+  $('.pagination li').removeClass('active');
+  $(this).parent().addClass('active');
+    });
+</script>
   
 </body>
 </html>       

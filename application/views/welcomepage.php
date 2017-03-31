@@ -40,7 +40,7 @@
 			<div class="jumbotron">
 	  			<h1>Welcome To My Blog</h1>
 	 			<p>Thank you for visiting my tets blog </p>
-	 			<p><a class="btn btn-primary btn-lg" href="/list" role="button">Popular Post</a></p>
+	 			<p><a class="btn btn-primary btn-lg" href="<?php echo site_url('post/showall') ?>" role="button">Popular Post</a></p>
 			</div>
 
 			

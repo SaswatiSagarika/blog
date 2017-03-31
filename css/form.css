@@ -1,0 +1,21 @@
+.container {
+  
+   
+    position: static;         
+}
+.row {
+    
+    border-radius: 20px;
+    width: 700px;
+    padding: 10px 20px 20px 20px;
+    border: 1px solid;
+    margin: 15px;
+   
+    
+    color: #000000;
+}
+.header {
+    text-align: center;
+    font-family: cursive;
+    color: #000000;
+}

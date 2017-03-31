@@ -28,7 +28,7 @@
             <div class="panel-body">
             <form class="myform" id="myform" action="" method="">
            
-                      <?php foreach($resources as $record): ?>
+                        <?php foreach($resources as $record): ?>
                       
                         <?php $BlogID=$record->getField('BlogId'); ?>
 
@@ -37,14 +37,14 @@
                         <div id="buttons" style="padding-left:20%">
                             <a  class="btn btn-danger" href="<?php echo site_url("post/destroyblog/".$BlogID)?>">Yes</a>
                             <a class="btn btn-warning" href="<?php echo site_url("/post/showall")?>">No</a>
-                                 <?php endforeach; ?>
+                        <?php endforeach; ?>
                         </div>
                     </form>
-            	<div>
+                <div>
                    
                 </div>
             </div>
-   	</div>
+       </div>
     </div> 
 </div>
 </body>

@@ -3,7 +3,7 @@
 <title><?php echo $title;?></title>
 </head>
 <body>
-	<h1><?php echo $heading;?></h1>
+    <h1><?php echo $heading;?></h1>
         <ul>
 <?php foreach ($todo_list as $item):?>
 

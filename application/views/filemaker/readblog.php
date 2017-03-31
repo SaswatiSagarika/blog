@@ -11,45 +11,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="p" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{!! csrf_token() !!}">
+ 
 
     <title>Read blog in details</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-     <link href="{{URL::asset('css/bootstrap-table.css')}}" rel="stylesheet">
-
-    <link href="{{URL::asset('css/master.css')}}" rel="stylesheet">
-    <!-- Styles -->
+<meta name="csrf-token" content="{{ csrf_token() }}" />
     
-   
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
 
 
 <div class="container">
     <div class="row">
-        <?php foreach($records as $record):?>
+        <?php foreach($resources1 as $record):?>
         <div class="col-md-12 ">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="jumbotron">
+                    
                         <h1><?php echo $record->getField('SubjectTitle')?></h1>
-                    </div>
+                    
                  </div>
                 
                 <div class="panel-body">
+                    <?php $BlogId=$record->getField('BlogId');?>
                    <p hidden><?php echo $record->getField('BlogId')?></p>
                             <p><?php echo $record->getField('Subject')?></p>
                             <p><i> by </i> <?php echo $record->getField('AuthorName')?> <i> on </i><?php echo $record->getField('Date')?></p>
-                            <button  class="btn btn-Primary" href="{{ url('/list') }}">
+                            <button  class="btn btn-Primary" href="<?php echo site_url("/post/showall")?>">
                                     <i class="fa fa-btn fa-sign-out"></i>Back
                             </button>
                 </div>
@@ -72,9 +59,14 @@
                         </div>
                     
                         <div>
-                            <form class="myform" id="myform" action="" method="">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <?php
+                                echo form_open('', array('id'=>'myform', 'class'=>'myform'));
+                                ?>
+                            
+                                <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" id="token" value="<?php echo $this->security->get_csrf_hash(); ?>">
                                 <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $record->getField('BlogId')?>">
+                               
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Name</label>
          
@@ -127,18 +119,22 @@
                 <div class="panel-body" >
                    <div class="comment-list" id="comment-list">
                   
-               <?php if ($comments == 0):?>
-                    <p>No comments are available for this blog</p>
-                 <?PHP else: ?>
-                 <?PHP foreach($comments as $comment):?>
+               
+                    <?PHP if($resources2) :
+                        foreach($resources2 as $comment):?>
                     
-                        <p><?php echo $comment->getField('Blog_Comments__BlogId::CommenterMessage')?></p>
-                    <p><i> by </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommenterName')?> <i> on </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommentDate')?><i> at </i><?php echo $comment->getField('Blog_Comments__BlogId::CommentTime')?> </p>
-                    <p><?php echo $comment->getField('Blog_Comments__BlogId::CommenterEmail')?></p> 
-                    <hr> 
+                                      <p><?php echo $comment->getField('Blog_Comments__BlogId::CommenterMessage')?></p>
+                                  <p><i> by </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommenterName')?> <i> on </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommentDate')?><i> at </i><?php echo $comment->getField('Blog_Comments__BlogId::CommentTime')?> </p>
+                                  <p><?php echo $comment->getField('Blog_Comments__BlogId::CommenterEmail')?></p> 
+                                  <hr> 
                       
-                   <?php endforeach; ?>
-                    <?php endif; ?>
+                        <?php endforeach; 
+                   else:
+                        echo '<h4>Be the first one to comment for this blog</h4>';
+                        echo '<p>No comment are present for this blog</p>';
+                   endif;
+                    ?> 
+                    
                  
                 
                 </div>
@@ -150,16 +146,8 @@
 </div>
 
     
-    <script type="text/javascript" src="{{URL::asset('js/CreateCommentAjax.js')}}"></script>
-        <script src='{{URL::asset('js/jquery-2.2.4.js')}}'></script>
-    <script src='{{URL::asset('js/jquery.blockUI.js')}}'></script>
-     
-    <!-- jQuery (necessary for BootstrapTable's JavaScript plugins) -->
-    <script src="{{URL::asset('js/bootstrap-table.js')}}"></script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!--<script src="{{URL::asset('js/bootstrap.js')}}"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> 
-   
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/CommentAjax.js">var baseurl = "<?php print base_url(); ?>";</script>
+        
 </body>
 </html>
 

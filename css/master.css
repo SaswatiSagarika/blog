@@ -1,0 +1,50 @@
+body {
+    font-family: 'Lato';
+    background-image: url(wall.jpg), ;
+    background-position: right bottom, left top;
+    background-repeat: no-repeat, repeat;
+    padding: 15px;
+}
+
+.fa-btn {
+    margin-right: 6px;
+}
+.navbar{
+ 
+ color:  #00ff00;  
+}
+.panel-heading{
+    background-color:#ebebe0;
+    color: #000000;
+    font-size: 26px;
+    text-align: center;
+}
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+   
+}
+.label{
+    vertical-align: right;
+}
+
+.newspaper {
+    column-count: 3;
+}
+input {
+ margin-bottom: 10px; 
+}
+.panel-heading  {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    padding-top: 8px;
+    font-size: 60px;
+}
+page-item:focus {
+  background: pink;
+}
+.active a {
+  background-color:#00ace6;
+}
