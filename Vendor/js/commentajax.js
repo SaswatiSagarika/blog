@@ -1,5 +1,5 @@
 /**
-*File name: CreateCommentAjax.
+*File name: commentajax.
 *File type: js.
 *Date of  creation:1st march 2017.
 *Author:mindfire solutions(saswati).
@@ -36,7 +36,8 @@ $(document).ready( function() {
                 if(response['error']== 'True'){
                     var error = '<div class="alert alert-danger"><ul>';
                
-                    error += '<li>'+response['name'] + '</li><li>'+response['email'] + '</li><li>'+response['comment'] + '</li>';
+                    error += '<li>'+response['name'] + '</li><li>'+response['email'] + '</li><li>'+
+                    response['comment'] + '</li>';
                
                 error+='</ul></div>';
                 $('#errorDiv').show().html(error);
@@ -44,7 +45,9 @@ $(document).ready( function() {
                 
                 } else{
                     
-                var comment ='<p>'+response['CommenterMessage']+'</p><p><i> by </i> '+response['CommenterName']+ '<i> on </i>'+response['CommentDate'] +'  <i> at </i>'+ response['CommentTime']+'</p><p>'+response['CommenterEmail']+'</p><hr>';
+                var comment ='<p>'+response['CommenterMessage']+'</p><p><i> by </i> '+
+                response['CommenterName']+ '<i> on </i>'+response['CommentDate'] +'  <i> at </i>'
+                + response['CommentTime']+'</p><p>'+response['CommenterEmail']+'</p><hr>';
                  alert(response.CommenterMessage);   
                 $("#comment-list").prepend(comment);
                

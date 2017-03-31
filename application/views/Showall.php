@@ -12,18 +12,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <title>Archives</title>
 </head>
-  
-
+ 
 <body id="app-layout">
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-info">
-                <div  style="height: 345px;" class="panel-heading">
-                    <div style="height: 257px;" class="jumbotron">
+                <div  class="panel-heading">
+                    <div  class="jumbotron">
                         <h1>Archives</h1>
                         <p>This is What I do </p>
                     </div>
@@ -41,15 +39,13 @@
                         </div>
                     </form>
                 </div>
-                  
-                    
                 <div class="panel-body">
                  
                 <?php
                 if(is_array($resources1)) :
                                
                     foreach($resources1 as $record):
-                        //$i++;
+                        $i++;
                         ?>
                     <div class="panel panel-primary">
                         <div style="height: 54px;"class="panel-heading">
@@ -101,9 +97,6 @@
                         $i++;
                 endfor;    
 
-                //if (!($skip>=$record_count - $per_page)):  // next button
-                //        echo "<li class='page-item'><a href='http://localhost/CodeIgniter-2.2.6/index.php/post/showall?skip=$next&search=$search'>Next</a></li> ";
-                //endif;
                 ?>
                </ul>
                 </div> 

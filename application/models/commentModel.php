@@ -10,19 +10,15 @@
     **/
 class Commentmodel extends CI_Model
 {
-
-
-
     public $db;
-
 
     public function __construct()
     {
 
         parent::__construct();
-        // $this->load->library('FilemakerConnect');
-        
+          
     }
+    
      /**
      *create new comment with respect to the BlogId
      *@param $id
@@ -35,8 +31,6 @@ class Commentmodel extends CI_Model
      */
     public function createnewcomments($id, $name, $email, $content)    
     {
-
-      
         $this->db = $this->filemakerconnect->getFMInstance();
 
         $record = $this->db->newAddCommand('Comments');
@@ -45,26 +39,27 @@ class Commentmodel extends CI_Model
         $record -> setField('CommenterEmail', $email);
         $record -> setField('CommenterMessage', $content);
         $results = $record->execute();
+        
         if($this->filemakerconnect->isError($results)) {
              echo $results->getMessage();
      
         }
+        
         $results =$results->getRecords();
 
         foreach ($results as $result) {
               
-                $array['CommentId'] = $result->getField('CommentId');
-                    $array['BlogId'] = $result->getField('BlogId');
-                    $array['CommenterName'] = $result->getField('CommenterName');
-                    $array['CommenterEmail'] = $result->getField('CommenterEmail');
-                    $array['CommenterMessage'] = $result->getField('CommenterMessage');
-                    $array['CommentDate'] = $result->getField('CommentDate');
-                    $array['CommentTime'] = $result->getField('CommentTime');
+            $array['CommentId'] = $result->getField('CommentId');
+            $array['BlogId'] = $result->getField('BlogId');
+            $array['CommenterName'] = $result->getField('CommenterName');
+            $array['CommenterEmail'] = $result->getField('CommenterEmail');
+            $array['CommenterMessage'] = $result->getField('CommenterMessage');
+            $array['CommentDate'] = $result->getField('CommentDate');
+            $array['CommentTime'] = $result->getField('CommentTime');
         
         }      
              
-                    return $array;  
+        return $array;  
     
     }
-
 }

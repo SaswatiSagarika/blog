@@ -11,17 +11,13 @@
 class Comment extends CI_Controller
 {
 
-
-
     protected $fm, $main_menu, $current_only;
 
     public function __construct()
-    {
-        
+    {       
         parent::__construct(); 
         $this->load->library(array('FilemakerConnect'));   
-        // $this->load->library('FileMaker');
-    
+        
     }
     /**
     * 
@@ -34,10 +30,28 @@ class Comment extends CI_Controller
     public function addnewcomments()    
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('name', 'Name', 'required');
-        $this->form_validation->set_rules('email', 'E-Mail Address', 'required');
-        $this->form_validation->set_rules('comment', 'Message', 'required');
-
+        //set the array to perform validation
+        $config = array(
+               array(
+                     'field'   => 'name', 
+                     'label'   => 'Name', 
+                     'rules'   => 'required'
+                  ),
+               array(
+                     'field'   => 'email', 
+                     'label'   => 'E-Mail Address', 
+                     'rules'   => 'required'
+                  ),
+               array(
+                     'field'   => 'comment', 
+                     'label'   => 'Message', 
+                     'rules'   => 'required'
+                  ),   
+              
+            );
+       //
+        $this->form_validation->set_rules($config);
+//if valid add
         if($this->form_validation->run() == true) { 
             $this->load->model('commentmodel');
             $id =$this->input->post('id');
@@ -49,6 +63,7 @@ class Comment extends CI_Controller
             echo json_encode($data);
         
         } else {
+            //send the error data
             $data = array(
             'error'=>'True',
             'name' => form_error('name'),

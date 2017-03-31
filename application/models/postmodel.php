@@ -31,17 +31,19 @@ class Postmodel extends CI_Model
      * @return $records
      
     */
+    
     public function createnewpost($name, $subject, $content)    
     {      
         $this->db = $this->filemakerconnect->getFMInstance();
+        //add new reocrd
         $record = $this->db->newAddCommand('blogger');
         $record -> setField('AuthorName', $name);
         $record -> setField('SubjectTitle', $subject);
         $record -> setField('Subject', $content);
         $result = $record->execute();
          
-    
     }
+    
     /**
     * 
     *  Show all records present in the DB with pagination and alos perform search opration on them.
@@ -52,15 +54,13 @@ class Postmodel extends CI_Model
     * @return records.
     
     */
+    
     public function showall($skip, $search)
     {
-
         
         $this->db = $this->filemakerconnect->getFMInstance();
-        if (true === strtotime($search)) {
-            $search = date("m/d/Y", strtotime($search));
         
-        }
+        //check if serach is empty
         if(!empty($search)) {
             $findCommand1 = $this->db->newFindRequest('Blogger');
             $findCommand1->addFindCriterion('AuthorName', $search);
@@ -78,40 +78,40 @@ class Postmodel extends CI_Model
             $findCommand5->addFindCriterion('Month', $search);
                     
             if (true === validateDate($search)) {
-                   $search = isValidDate($search);
-                    
+                $search = isValidDate($search);
                 $findCommand6 = $this->db->newFindRequest('Blogger');
                 $findCommand6->addFindCriterion('Date', $search);
             
             }
-                
+        //perform compound find    
             $record = $this->db->newCompoundFindCommand('Blogger');
             $record->add(1, $findCommand1);
             $record->add(2, $findCommand2);
             $record->add(3, $findCommand3);
             $record->add(4, $findCommand4);
             $record->add(5, $findCommand5);
+            
             if (true === validateDate($search)) {
                 $record->add(6, $findCommand6);
             
             }
-            $record->addSortRule('BlogId', 1, FILEMAKER_SORT_ASCEND);    
-               
-            echo $this->filemakerconnect->isError($record);
             
+            $record->addSortRule('BlogId', 1, FILEMAKER_SORT_ASCEND);    
+     
         } else{
                     
             $record = $this->db->newFindAllCommand('Blogger');
         
-        }                       
+        }
+        //assigning the max no records present in the page
         $max=3;               
         if(!isset($skip)) { $skip = 0; 
-        }           
+        }
+        //set the range for the pagination
         $record->setRange($skip, $max);
-        
         $result = $record->execute();
-    
-       $error = $this->filemakerconnect->isError($result);
+        //check if any error
+        $error = $this->filemakerconnect->isError($result);
                
         if(!$error) {
             $record_count = $result->getFoundSetCount();
@@ -125,7 +125,6 @@ class Postmodel extends CI_Model
             return [$result,0];
         
         }
-    
     }
 
     /**
@@ -142,8 +141,9 @@ class Postmodel extends CI_Model
     */
     public function readpost($id)    
     {
-              $this->db = $this->filemakerconnect->getFMInstance(); 
+        $this->db = $this->filemakerconnect->getFMInstance(); 
         $record = $this->db->newFindCommand('blogger');
+        //search the record by id
         $record->addFindCriterion('BlogId', $id);
             
         $result = $record->execute();
@@ -152,22 +152,21 @@ class Postmodel extends CI_Model
              echo $result->getMessage();
         
         } else {
+            
             $records = $result->getRecords();
             
             foreach($records as $record){
-                
+                //get the records from the portal    
                  $comments = $record->getRelatedSet('Blog_Comments__BlogId');
             
             }
-            
+            //if no comments are present for the blog
             if($this->filemakerconnect->isError($comments)== true) {
                 $comments = 0;
             }
             
             return [$records, $comments];
-        
         }
-
     }
     /**
     * 
@@ -182,11 +181,13 @@ class Postmodel extends CI_Model
     */
     public function deletepost($id)    
     {
-        $this->db = $this->filemakerconnect->getFMInstance(); 
+        $this->db = $this->filemakerconnect->getFMInstance();
+        //deleted the record by id
         $record = $this->db->newDeleteCommand('blogger', $id);
         $result = $record->execute();
      
     }
+    
     /**
     * 
     * 
@@ -194,7 +195,6 @@ class Postmodel extends CI_Model
     *
     * @param String $request - contain id variable.
     * 
-    
     */
     public function editpost($id, $name, $subject, $content)    
     {
@@ -214,13 +214,13 @@ class Postmodel extends CI_Model
             $record -> setField('Subject', $content);
             $record->commit();
             
-        
         }
             
         return $records;
 
     
     }
+    
     /**
     * 
     * 
@@ -236,11 +236,11 @@ class Postmodel extends CI_Model
     {
             $this->db = $this->filemakerconnect->getFMInstance(); 
             $record = $this->db->newFindCommand('Blogger');
+            //search the record by id
             $record->addFindCriterion('BlogId', $id);
             $result = $record->execute();
             $records = $result->getRecords();
-           //   $error = $this->filemakerconnect->isError($records);
-           // $this->filemakerconnect->dd($error);
+          
            return $records;
         
     
