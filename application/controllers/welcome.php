@@ -1,4 +1,5 @@
-<?php if (! defined('BASEPATH')) { exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) {
+    exit('No direct script access allowed');
 }
 /**
     *File name: welcome.
@@ -16,10 +17,10 @@ class Welcome extends CI_Controller
      *
      * Maps to the following URL
      *         http://example.com/index.php/welcome
-     *    - or -  
+     *    - or -
      *         http://example.com/index.php/welcome/index
      *    - or -
-     * Since this controller is set as the default controller in 
+     * Since this controller is set as the default controller in
      * config/routes.php, it's displayed at http://example.com/
      *
      * So any other public methods not prefixed with an underscore will
@@ -28,13 +29,13 @@ class Welcome extends CI_Controller
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     /**
-     
+
      * @shows the welcomepage
      */
     public function index()
-    {       
-        $this->load->view('blogassests/headerfile');
-         $this->load->view('blogassests/nav-bar');
+    {
+        $data['header']= $this->load->view('blogassests/headerfile');
+        $data['nav'] =$this->load->view('blogassests/nav-bar');
         $this->load->view('welcomepage');
     }
     
@@ -46,36 +47,35 @@ class Welcome extends CI_Controller
         $this->load->view('welcomepage');
     }
      /**
-     
+
      * @shows the about page
      */
     public function about()
     {
-        $this->load->view('blogassests/headerfile');
-         $this->load->view('blogassests/nav-bar');
-        $this->load->view('about');
+        $data['header']= $this->load->view('blogassests/headerfile');
+        $data['nav'] =$this->load->view('blogassests/nav-bar');
+        $this->load->view('about', $data);
     }
      /**
-     
+
      * @shows the Contactpage
      */
     public function contact()
     {
-        $this->load->view('blogassests/headerfile');
-         $this->load->view('blogassests/nav-bar');
-        $this->load->view('contact');
+        $data['header']= $this->load->view('blogassests/headerfile');
+        $data['nav'] =$this->load->view('blogassests/nav-bar');
+        $this->load->view('contact', $data);
     }
      /**
-     
+
      * @shows the newblogform
      */
     public function newblogform()
     {
-        $this->load->view('blogassests/headerfile');
-         $this->load->view('blogassests/nav-bar');
-        $this->load->view('newblogform');
+        $data['header']= $this->load->view('blogassests/headerfile');
+        $data['nav'] =$this->load->view('blogassests/nav-bar');
+        $this->load->view('newblogform', $data);
     }
-
 }
 
 /* End of file welcome.php */

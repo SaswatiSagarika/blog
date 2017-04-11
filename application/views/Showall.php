@@ -42,10 +42,8 @@
                 <div class="panel-body">
                  
                 <?php
-                if(is_array($resources1)) :
-                               
-                    foreach($resources1 as $record):
-                        $i++;
+                if (is_array($resources1)) :
+                    foreach ($resources1 as $record) :
                         ?>
                     <div class="panel panel-primary">
                         <div style="height: 54px;"class="panel-heading">
@@ -65,15 +63,15 @@
                             
                         </div>
                     </div>
-                    <?php endforeach;
-                 else:
+                    <?php                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         endforeach;
+                else :
                         echo '<h4>'.$resources1.'</h4>';
-                 endif;
+                endif;
                     ?>
                 
                 <ul class="pagination">
                
-                <?php 
+                <?php
                 
                 // PAGINATION cont.
                 $per_page = 3;
@@ -87,15 +85,14 @@
                         echo "<li class='page-item'><a href='http://localhost/CodeIgniter/index.php/post/showall?skip=$prev&search=$search'>Prev</a></li> ";
                 endif;
                 $i=1;
-                for($x=0; $x<$record_count; $x=$x+$per_page):      // numbers between previous and next
+                for ($x=0; $x<$record_count; $x=$x+$per_page) :      // numbers between previous and next
                     if ($skip==$x) :
-                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";        
-                        else :
+                        echo "<li class='page-item'><a href='http://localhost/CodeIgniter/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";
+                    else :
                             echo "<li class='page-item'><a href='http://localhost/CodeIgniter/index.php/post/showall?skip=$x&search=$search'>$i</a></li> ";
-                        
-                        endif;
+                    endif;
                         $i++;
-                endfor;    
+                endfor;
 
                 ?>
                </ul>

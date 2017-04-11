@@ -16,7 +16,7 @@
 </head>
 <div class="container">
     <div class="row">
-        <?php foreach($resources1 as $record):?>
+        <?php foreach ($resources1 as $record) :?>
         <div class="col-md-12 ">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -91,7 +91,7 @@
                                         </button>
                                     </div>
                                 </div>
-                           <?php form_close();?>
+                            <?php form_close();?>
                         </div>
                     </div>
                 </div>
@@ -108,21 +108,21 @@
                 <div class="panel-body" >
                    <div class="comment-list" id="comment-list">
                   
-                    <?PHP if($resources2) :
-                        foreach($resources2 as $comment):?>
+                    <?PHP if ($resources2) :
+                        foreach ($resources2 as $comment) :?>
                     
                         <p><?php echo $comment->getField('Blog_Comments__BlogId::CommenterMessage')?></p>
-                        <p><i> by </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommenterName')?> <i> on </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommentDate')?><i> at </i><?php echo $comment->getField('Blog_Comments__BlogId::CommentTime')?> </p>
+                        <p><i> by </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommenterName')?>
+                        <i> on </i> <?php echo $comment->getField('Blog_Comments__BlogId::CommentDate')?><i> at </i>
+                        <?php echo $comment->getField('Blog_Comments__BlogId::CommentTime')?> </p>
                         <p><?php echo $comment->getField('Blog_Comments__BlogId::CommenterEmail')?></p> 
                         <hr> 
-            
-                        <?php endforeach; 
-                    else:
-                        echo '<h4>Be the first one to comment for this blog</h4>';
-                        echo '<p>No comment are present for this blog</p>';
-                    endif;
-                    ?> 
-
+        <?php
+                        endforeach;
+else :
+                            echo '<h4>Be the first one to comment for this blog</h4>';
+                            echo '<p>No comment are present for this blog</p>';
+endif; ?> 
                     </div>
                 </div>
             </div>    
@@ -131,7 +131,8 @@
 
 </div>
 
-    <script type="text/javascript" src="<?php echo base_url(); ?>Vendor/js/commentajax.js">var baseurl = "<?php print base_url(); ?>";</script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>Vendor/js/commentajax.js">var
+    baseurl = "<?php print base_url(); ?>";</script>
         
 </body>
 </html>

@@ -1,4 +1,5 @@
-<?php if (! defined('BASEPATH')) { exit('No direct script access allowed');
+<?php if (! defined('BASEPATH')) {
+    exit('No direct script access allowed');
 }
  /**
     *File name: Post.
@@ -8,87 +9,77 @@
     *Purpose: this php file contains functions to be called from controller file.
     *Path:D:\PHP Projects\blog and comments\blog1\app.
     **/
-
-
 class Post extends CI_Controller
 {
     protected $fm, $main_menu, $current_only;
-    
-    /**
+/**
     *  Calls the filemaker parent class
     */
     public function __construct()
     {
-        parent::__construct(); 
-        $this->load->library(array('FilemakerConnect'));   
-       
+        parent::__construct();
+        $this->load->library(array('FilemakerConnect'));
     }
   
     /**
-    * 
-    * 
+    *
+    *
     * Show the form for creating a new resource.
     *
     * @return to showall page
-    
     */
-    public function createnew()    
-    {         
+    public function createnew()
+    {
         $this->load->model('postmodel');
         $this->load->library('form_validation');
-        //array for validation
+//array for validation
          $config = array(
                array(
-                     'field'   => 'name', 
-                     'label'   => 'Name', 
+                     'field'   => 'name',
+                     'label'   => 'Name',
                      'rules'   => 'required'
                   ),
                array(
-                     'field'   => 'subject', 
-                     'label'   => 'Subject', 
+                     'field'   => 'subject',
+                     'label'   => 'Subject',
                      'rules'   => 'required'
                   ),
                array(
-                     'field'   => 'content', 
-                     'label'   => 'Content', 
+                     'field'   => 'content',
+                     'label'   => 'Content',
                      'rules'   => 'required'
-                  ),   
+                  ),
               
             );
-       
         $this->form_validation->set_rules($config);
-       //if any error present
+//if any error present
          $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
-        //if valid
-        if($this->form_validation->run() == true) {
+//if valid
+        if ($this->form_validation->run() == true) {
             $name =$this->input->post('name');
             $subject =$this->input->post('subject');
             $content =$this->input->post('content');
-          //create new record
+//create new record
             $this->postmodel->createnewpost($name, $subject, $content);
-            
             redirect('post/showall', 'refresh');
         } else {
-            
-            $this->load->view('blogassests/headerfile');
-            $this->load->view('blogassests/nav-bar');
-            $this->load->view('newblogform');
-            
+        //adding the view pages in the records array
+            $data['header']=$this->load->view('blogassests/headerfile');
+            $data['nav']=$this->load->view('blogassests/nav-bar');
+            $this->load->view('newblogform', $data);
         }
-
     }
     
     /**
      * Display the new blog add page.
      *
      */
-    public function newblogform()    
+    public function newblogform()
     {
         //show the new add form
         $this->load->view('blogassests/headerfile');
         $this->load->view('blogassests/nav-bar');
         $this->load->view('newblogform');
-    
     }
     
     /**
@@ -101,22 +92,21 @@ class Post extends CI_Controller
     {
 
         $this->load->model('postmodel');
-           
-         //get the value from the url
+//get the value from the url
         $search = $this->input->get('search');
         $skip= $this->input->get('skip');
-        //perform showall
+//perform showall
         $data['resources']=$this->postmodel->showall($skip, $search);
         echo $this->filemakerconnect->isError($data['resources']);
-        //retrive the record array and comment array differently
+//retrive the record array and comment array differently
         $records['resources1']= $data['resources']['0'];
         $records['resources2'] =$data['resources']['1'];
-       
-         //$this->filemakerconnect->dd($records['resources1']);
-        $this->load->view('blogassests/headerfile');
-        $this->load->view('blogassests/nav-bar');
+//adding the view pages in the records array
+        $records['resources3'] =$this->load->view('blogassests/headerfile');
+        $records['resources4'] =$this->load->view('blogassests/nav-bar');
+//$this->filemakerconnect->dd($records['resources1']);
+        
         $this->load->view('Showall', $records);
-    
     }
     
      /**
@@ -129,14 +119,13 @@ class Post extends CI_Controller
     {
 
         $this->load->model('postmodel');
-          //get the id from the url
+//get the id from the url
         $id= $this->uri->segment(3);
         $data['resources']=$this->postmodel->getblogdetailsbyId($id);
-
-        $this->load->view('blogassests/headerfile');
-        $this->load->view('blogassests/nav-bar');
+        $data['header']=$this->load->view('blogassests/headerfile');
+        $data['nav']=$this->load->view('blogassests/nav-bar');
+//adding the view pages in the records array
         $this->load->view('filemaker/editblog', $data);
-
     }
     
     /**
@@ -149,14 +138,13 @@ class Post extends CI_Controller
     {
 
         $this->load->model('postmodel');
-          //get the id from the url
+//get the id from the url
         $id= $this->uri->segment(3);
-        
         $data['resources']=$this->postmodel->getblogdetailsbyId($id);
-        $this->load->view('blogassests/headerfile');
-        $this->load->view('blogassests/nav-bar');
+        $data['header']=$this->load->view('blogassests/headerfile');
+        $data['nav']=$this->load->view('blogassests/nav-bar');
+//adding the view pages in the records array
         $this->load->view('filemaker/deleteblog', $data);
-
     }
     
     /**
@@ -168,97 +156,84 @@ class Post extends CI_Controller
     public function readblogform()
     {
         $this->load->model('postmodel');
-          //get the id from the url
+//get the id from the url
         $id= $this->uri->segment(3);
-          
         $data['resources']=$this->postmodel->readpost($id);
-        
-        //retrive the record array and comment array differently
+//retrive the record array and comment array differently
         $records['resources1']= $data['resources']['0'];
         $records['resources2'] =$data['resources']['1'];
-        
-        $this->load->view('blogassests/headerfile');
-        $this->load->view('blogassests/nav-bar');
+//adding the view pages in the records array
+        $records['header']=$this->load->view('blogassests/headerfile');
+        $records['nav']=$this->load->view('blogassests/nav-bar');
         $this->load->view('filemaker/readblog', $records);
-
     }
     
     /**
-    * 
-    * 
+    *
+    *
     * Remove the specified blog from storage.
     *
     * @param  int $id
     * @return Response
-    
+
     */
-    public function destroyblog()    
+    public function destroyblog()
     {
         $this->load->model('postmodel');
-        //get the id from the url
+//get the id from the url
         $id= $this->uri->segment(3);
-        //delete by id
+//delete by id
         $records=$this->postmodel->deletepost($id);
         redirect('post/showall', 'refresh');
-    
     }
     
     /**
-    * 
-    * 
+    *
+    *
     * Show the form for editing the blog resource.
     *
     * @param  int $id
     * @return to list page
-    
+
     */
-    public function editrecordblog()    
+    public function editrecordblog()
     {
         $this->load->model('postmodel');
-
         $this->load->library('form_validation');
-        //array to perform validation
+//array to perform validation
         $config = array(
                array(
-                     'field'   => 'name', 
-                     'label'   => 'Name', 
+                     'field'   => 'name',
+                     'label'   => 'Name',
                      'rules'   => 'required'
                   ),
                array(
-                     'field'   => 'subject', 
-                     'label'   => 'Subject', 
+                     'field'   => 'subject',
+                     'label'   => 'Subject',
                      'rules'   => 'required'
                   ),
                array(
-                     'field'   => 'content', 
-                     'label'   => 'Content', 
+                     'field'   => 'content',
+                     'label'   => 'Content',
                      'rules'   => 'required'
-                  ),   
+                  ),
               
             );
-       
         $this->form_validation->set_rules($config);
-       
         $id =$this->input->post('id');
-        
-        if($this->form_validation->run() == true) {
-           //if valid
+        if ($this->form_validation->run() == true) {
+        //if valid
             $id =$this->input->post('id');
             $name =$this->input->post('name');
             $subject =$this->input->post('subject');
             $content =$this->input->post('content');
             $this->filemakerconnect->dd($content);
-            $result=$this->postmodel->editpost($id, $name, $subject, $content);  
-          
+            $result=$this->postmodel->editpost($id, $name, $subject, $content);
             redirect('post/showall', 'refresh');
-            
-        }
-        else{
-            //if not valid
+        } else {
+        //if not valid
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
             redirect('post/editblogform/$id');
-            
         }
     }
-}  
-?>
+}

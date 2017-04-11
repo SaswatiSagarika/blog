@@ -26,8 +26,10 @@
             </div></div>
                 <div class="panel-body">
                     
-                    <p>Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you within 24 hours!</p>
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+                    <p>Want to get in touch with me? Fill out the form below to send me a message
+                    and I will try to get back to you within 24 hours!</p>
+                    <form class="form-horizontal" role="form" method="POST"
+                          action="{{ url('/auth/login') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
@@ -47,7 +49,8 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Message</label>
                             <div class="col-md-6">
-                                <textarea rows="5" class="form-control"  id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <textarea rows="5" class="form-control"  id="message"
+                                required data-validation-required-message="Please enter a message."></textarea>
                             </div>
                         </div>
                         <div class="form-group">

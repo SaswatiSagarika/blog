@@ -25,7 +25,7 @@
             </div>                
             <div class="panel-body">
             <form class="myform" id="myform" action="" method="">
-                <?php foreach($resources as $record): ?>              
+                <?php foreach ($resources as $record) : ?>              
                 <?php $BlogID=$record->getField('BlogId'); ?>
                 <div class="error"></div>
                 <h3 class="alert alert-error">Are you sure to delete you want to delete this Blog ?</h3>
